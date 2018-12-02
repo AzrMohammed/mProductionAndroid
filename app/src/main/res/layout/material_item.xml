@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_ly"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="1dp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:id="@+id/update_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <leora.com.baseapp.customviews.F1TextViewBold
+                    android:id="@+id/material_name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/edit_iv"
+                    android:text="Name"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/text_kind_grey"
+                    android:textSize="@dimen/text_medium" />
+
+                <ImageView
+                    android:id="@+id/delete_iv"
+                    android:layout_width="30dp"
+                    android:padding="4dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_delete"
+                    android:layout_alignParentRight="true"
+                    android:tint="@color/text_color_light_1"
+                    android:layout_alignParentTop="true"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_iv"
+                    android:layout_toLeftOf="@+id/delete_iv"
+                    android:layout_width="30dp"
+                    android:padding="6dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_edit"
+                    android:tint="@color/text_color_light_1"
+                    />
+
+            </RelativeLayout>
+
+
+            <leora.com.baseapp.customviews.F1TextViewRegular
+                android:id="@+id/material_ref_id_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/update_ly"
+                android:text="Reference Id"
+                android:textColor="@color/text_kind_grey"
+                android:textSize="@dimen/text_small" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/material_ref_id_tv"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/length_ly"
+                    >
+                    <leora.com.baseapp.customviews.F1TextViewBold
+                        android:id="@+id/length_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="Length"
+                        android:textColor="@color/text_kind_grey"
+                        android:textSize="@dimen/text_smallxx" />
+
+                    <leora.com.baseapp.customviews.F1TextViewRegular
+                        android:id="@+id/length_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/audit_date_title"
+                        android:textColor="@color/text_kind_grey"
+                        android:textSize="@dimen/text_smallx" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

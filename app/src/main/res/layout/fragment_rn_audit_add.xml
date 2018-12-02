@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <leora.com.baseapp.customviews.F1TextViewLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Raw Material Audit"
+                android:textSize="@dimen/text_largex"
+                android:textColor="@color/black_solid"
+
+                />
+
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+
+                android:editable="false"
+                android:id="@+id/rm_tv"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Raw material"
+                android:textSize="@dimen/text_smallx"
+                />
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/metric_count_tv"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="6"
+                android:hint="Count (Total quantity)"
+                android:textSize="@dimen/text_smallx"
+                />
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/supplier_name_tv"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Supplier Name (optional)"
+                android:inputType="textCapSentences"
+                android:textSize="@dimen/text_smallx"
+                />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="5"
+                >
+
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+
+                    android:editable="false"
+                    android:id="@+id/audit_date_tv"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:hint="Audit date"
+                    android:textSize="@dimen/text_smallx"
+                    />
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+
+                    android:editable="false"
+                    android:id="@+id/audit_time_tv"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Audit time"
+                    android:textSize="@dimen/text_smallx"
+                    />
+
+
+            </LinearLayout>
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/comment_tv"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/bg_mind_grey_rectangle_radius"
+                android:inputType="textCapSentences"
+                android:gravity="top"
+                android:textSize="@dimen/text_smallx"
+                android:hint="Note if any"
+                android:padding="5dp" />
+
+
+            <LinearLayout
+                android:id="@+id/submit_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/bg_button_primary"
+                android:orientation="vertical">
+
+
+                <leora.com.baseapp.customviews.F1TextViewRegular
+                    android:id="@+id/submit_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="Submit"
+                    android:textAllCaps="true"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_smallx" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

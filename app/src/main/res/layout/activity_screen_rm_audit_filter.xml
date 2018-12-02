@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <leora.com.baseapp.customviews.F1TextViewLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Raw Material Audit Filter"
+                android:textSize="@dimen/text_largex"
+                android:textColor="@color/black_solid"
+
+                />
+
+
+            <leora.com.baseapp.customviews.F1TextViewLight
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Audit Type :"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/black_solid"
+
+                />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+
+                <RadioButton
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All"
+                    android:id="@+id/a_type_all"
+                    android:layout_gravity="left"
+                    android:checked="false"
+                    android:textSize="@dimen/text_smallx" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Raw Materail Inbound"
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/a_type_ib"
+                    android:layout_gravity="left"
+                    android:checked="false"
+                    android:textSize="@dimen/text_smallx" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Production Planning"
+                    android:id="@+id/a_type_planning"
+                    android:layout_gravity="left"
+                    android:checked="false"
+                    android:textSize="@dimen/text_smallx" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Production ( SMG)"
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/a_type_smg"
+                    android:layout_gravity="left"
+                    android:checked="false"
+                    android:textSize="@dimen/text_smallx" />
+
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rejection"
+                    android:id="@+id/a_type_rejection"
+                    android:layout_gravity="left"
+                    android:checked="false"
+                    android:textSize="@dimen/text_smallx" />
+
+
+            </RadioGroup>
+
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+
+                android:editable="false"
+                android:id="@+id/rm_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Raw material"
+                android:textSize="@dimen/text_smallx"
+                />
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/audit_type_tv"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Audit Type"
+                android:inputType="textCapSentences"
+                android:textSize="@dimen/text_smallx"
+                />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4"
+                >
+
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+
+                    android:editable="false"
+                    android:id="@+id/audit_from_date_tv"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:hint="Audit From date"
+                    android:textSize="@dimen/text_smallx"
+                    />
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+
+                    android:editable="false"
+                    android:id="@+id/audit_to_date_tv"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Audit To Date"
+                    android:textSize="@dimen/text_smallx"
+                    />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/submit_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/bg_button_primary"
+                android:orientation="vertical">
+
+
+                <leora.com.baseapp.customviews.F1TextViewRegular
+                    android:id="@+id/submit_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="Apply"
+                    android:textAllCaps="true"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_smallx" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

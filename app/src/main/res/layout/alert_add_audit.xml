@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/parent_cardview"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="10dp"
+        android:background="@color/white"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true">
+
+        <ScrollView
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+
+                <LinearLayout
+                    android:id="@+id/for_rm_store"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <leora.com.baseapp.customviews.F1TextViewBold
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Inbound to Raw Material Store"
+                        android:textSize="@dimen/text_medium" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/for_production_planning"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <leora.com.baseapp.customviews.F1TextViewBold
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="For forecasting Production Planning"
+                        android:textSize="@dimen/text_medium" />
+                </LinearLayout>
+
+            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/for_production_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <leora.com.baseapp.customviews.F1TextViewBold
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Taken for \nProduction unit"
+                            android:textSize="@dimen/text_medium" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/for_rejection_store"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <leora.com.baseapp.customviews.F1TextViewBold
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Rejection material"
+                            android:textSize="@dimen/text_medium" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
