@@ -25,7 +25,7 @@ public class Constants {
      */
     final public static int BUILD_TYPE = BUILD_TYPE_LOCAL;
 //    http://192.168.0.100/mproduction_api/index.php/api/SyncData
-    public static final String SERVER = ((BUILD_TYPE == BUILD_TYPE_LIVE) || (BUILD_TYPE == BUILD_TYPE_LIVE_DEMO)) ? "http://192.168.0.49" : (BUILD_TYPE == BUILD_TYPE_STAGING) ? "staging_ip_here" : "http://192.168.0.49";
+    public static final String SERVER = ((BUILD_TYPE == BUILD_TYPE_LIVE) || (BUILD_TYPE == BUILD_TYPE_LIVE_DEMO)) ? "http://leorainfotech.in" : (BUILD_TYPE == BUILD_TYPE_STAGING) ? "staging_ip_here" : "http://192.168.0.49";
 
     public static final String APP_PACAGENAME = (BUILD_TYPE == BUILD_TYPE_LIVE) ? ValueUtils.APP_ID : "" + ValueUtils.APP_ID ;
 
@@ -35,6 +35,10 @@ public class Constants {
     final public static String TBL_RAW_MATERIAL_AUDIT = "raw_material_audit";
     final public static String TBL_CONFIG = "confiq";
     final public static String TBL_METRICS = "metrics";
+    final public static String TBL_PRODUCT = "product";
+    final public static String TBL_PRODUCTION_PROCESS = "production_process";
+    final public static String TBL_P_MACHINE = "p_machine";
+    final public static String TBL_MACHINE_PRODUCTIVITY_AUDIT = "machine_productivity_audit";
 
     public static final File app_storageDir = new File(getRootFolder(false));
     public static String CURRENT_ACTIVITY = ValueUtils.NOT_DEFINED;
@@ -59,8 +63,14 @@ public class Constants {
     public static String URL_REPORT_ERROR = Constants.BASE_URL + "report_error_sample";
     public static String URL_SYNC_DATA = Constants.BASE_URL + "SyncData";
     public static String URL_ADD_RM = Constants.BASE_URL + "AddRawMaterial";
+    public static String URL_ADD_PRODUCT = Constants.BASE_URL + "AddProduct";
+    public static String URL_ADD_PROCESS = Constants.BASE_URL + "AddProcess";
+    public static String URL_ADD_P_MACHINE = Constants.BASE_URL + "AddPMachine";
     public static String URL_GET_RM_AUDITS = Constants.BASE_URL + "GetRmAudits";
     public static String URL_ADD_RM_AUDIT = Constants.BASE_URL + "AddRawMaterialAudit";
+    public static String URL_ADD_MACHINE_PRODUCTIVITY_AUDIT = Constants.BASE_URL + "AddMachineProductivityAudit";
+    public static String URL_DEL_RM = Constants.BASE_URL + "DeleteRawMaterial";
+    public static String URL_DEL_ITTEM = Constants.BASE_URL + "DeleteItem";
 
     public static String getRootFolder(Boolean isSlashRequired) {
         String path = Environment.getExternalStorageDirectory() + "/" + ValueUtils.ROOT_FOLDER_PREFIX;

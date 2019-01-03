@@ -2,6 +2,7 @@ package leora.com.baseapp.customclass;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import leora.com.baseapp.Constants;
 import leora.com.baseapp.utils.HardwareUtils;
@@ -20,7 +21,7 @@ public class CustomAppCompatActivity extends AppCompatActivity {
         ViewUtils.setAnimForActivityOncreate(this);
         if (HardwareUtils.isValidDevice()) {
             String currentAct_name = getLocalClassName().substring(getLocalClassName().lastIndexOf('.') + 1).trim();
-            //  //Log.e("super_oncreate", currentAct_name);
+              Log.e("super_oncreate", currentAct_name);
             Constants.CURRENT_ACTIVITY = currentAct_name;
         } else {
             finish();

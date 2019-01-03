@@ -20,7 +20,7 @@
 
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo"
@@ -55,10 +55,53 @@
         <activity
             android:name=".activity.ScreenRmAdd"
             android:screenOrientation="portrait" />
-   <activity
+        <activity
             android:name=".activity.ScreenRmAuditAddBase"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProductBase"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProductAdd"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenMachineBase"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenMachineAdd"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenMachineAuditBase"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenMachineProductivityAuditAdd"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProductSearch"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.ScreenMachineSearch"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.ScreenMachineProductivityAuditFilter"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProcessAdd"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProcessBase"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProcessSearch"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProductDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScreenProductProcessEdit"
+            android:screenOrientation="portrait" />
 
 
     </application>

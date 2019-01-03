@@ -15,7 +15,7 @@ import java.util.Locale;
 public class CalendarUtils {
 
     //    2016-08-31T17:46:04
-    final public static String tfs_yeardatetime_server = "yyyy-MM-dd'T'HH:mm:ss";
+    final public static String tfs_yeardatetime_server = "yyyy-MM-dd HH:mm:ss";
 
     final public static String tfs_yeardatetime_1 = "dd MMM yyyy' at 'hh:mm a";
     final public static String tfs_yeardatetime_2 = "dd MMM',' hh:mm a";
@@ -32,6 +32,20 @@ public class CalendarUtils {
     public static int current_date = Integer.parseInt(getcurrentInstance(1));
     public static int current_month = Integer.parseInt(getcurrentInstance(2));
     public static int current_year = Integer.parseInt(getcurrentInstance(3));
+
+
+
+
+
+    public static String getDisplayDateFrom(String value, String format)
+    {
+        Calendar cal_val = getCalender(value, format);
+
+        value = getTimeString(cal_val, tfs_yeardatetime_2);
+
+        return value;
+
+    }
 
     /**
      * get calendar obj for input string of specified format
@@ -253,13 +267,21 @@ public class CalendarUtils {
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        String display_age = "";
-        if (mYear != 0) display_age = mYear + " year" + ((mYear > 1) ? "s" : "");
-        else if (mMonth != 0 && !DataUtils.isStringValueExist(display_age))
-            display_age = mMonth + " month" + ((mMonth > 1) ? "s" : "");
-        else if (!DataUtils.isStringValueExist(display_age))
-            display_age = mDay + " day" + ((mDay == 1) ? "" : "s");
 
+        int mhours = c.get(Calendar.HOUR_OF_DAY);
+        int val_min = c.get(Calendar.MINUTE);
+        int result  = val_min % 60;
+        int mMinutes=   result < 0? result + 60 : result;
+
+
+        String display_age = "";
+        if (mYear != 0) display_age = mYear + " year" + ((mYear > 1) ? "s" : " ");
+        else if (mMonth != 0 && !DataUtils.isStringValueExist(display_age))
+            display_age = mMonth + " month" + ((mMonth > 1) ? "s" : " ");
+        else if (!DataUtils.isStringValueExist(display_age))
+            display_age = mDay + " day" + ((mDay == 1) ? "" : "s ");
+
+        display_age = display_age +mhours + " hours "+ mMinutes + " minutes";
         return display_age;
     }
 
@@ -279,6 +301,38 @@ public class CalendarUtils {
         return c.get(Calendar.YEAR) - 1970;
 
     }
+
+
+    /**
+     * returns the difference between two dates
+     *
+     * @return
+     */
+    public static String getDifferenceDates(Long from, Long to) {
+
+        Long date_current = to;
+        Long years_difference = date_current - from;
+
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(years_difference);
+        int mYear = c.get(Calendar.YEAR) - 1970;
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        int mhours = c.get(Calendar.HOUR_OF_DAY);
+        int val_min = c.get(Calendar.MINUTE);
+        int result  = val_min % 60;
+        int mMinutes=   result < 0? result + 60 : result;
+
+        String display_age = "";
+        if (mYear != 0) display_age = mYear + " year" + ((mYear > 1) ? "s " : " ");
+        else if (mMonth != 0 && !DataUtils.isStringValueExist(display_age))
+            display_age = mMonth + " month" + ((mMonth > 1) ? "s " : " ");
+        else if (!DataUtils.isStringValueExist(display_age))
+            display_age = mDay + " day" + ((mDay == 1) ? " " : "s ");
+        display_age = display_age +mhours + " hours "+ mMinutes + " minutes";
+        return display_age;
+    }
+
 
 
 }

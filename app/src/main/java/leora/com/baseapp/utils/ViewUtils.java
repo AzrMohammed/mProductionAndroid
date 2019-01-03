@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -76,7 +77,18 @@ public class ViewUtils {
     //Lato Regular and bold typeface
     public static Typeface font_regular, font_bold;
 
-    
+
+
+    public static void setHeaderC1(final Activity activity, View view, String title)
+    {
+        ((TextView) view.findViewById(R.id.screen_name_tv)).setText(title);
+        view.findViewById(R.id.back_press_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onBackPressed();
+            }
+        });
+    }
     
     
     /**

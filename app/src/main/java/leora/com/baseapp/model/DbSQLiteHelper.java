@@ -17,6 +17,10 @@ import java.util.Map;
 
 import leora.com.baseapp.Constants;
 import leora.com.baseapp.model.apimodel.MaterialAuditModel;
+import leora.com.baseapp.model.dbmodel.MachineProductivityAuditModel;
+import leora.com.baseapp.model.dbmodel.PMachineModel;
+import leora.com.baseapp.model.dbmodel.ProductModel;
+import leora.com.baseapp.model.dbmodel.ProductionProcessModel;
 import leora.com.baseapp.model.dbmodel.RawMaterialModel;
 import leora.com.baseapp.ormfiles.ModelBaseClass;
 import leora.com.baseapp.utils.DataUtils;
@@ -28,7 +32,7 @@ public class DbSQLiteHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = (((Constants.BUILD_TYPE == Constants.BUILD_TYPE_LIVE) || (Constants.BUILD_TYPE == Constants.BUILD_TYPE_LIVE_DEMO)) ? "" : ((Constants.BUILD_TYPE == Constants.BUILD_TYPE_STAGING) ? "STAGING_" : "LOCAL_")) + "vc_hospital.db";
 
     public DbSQLiteHelper(Context context) {
-        super(context, DATABASE_NAME, null, 4);
+        super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
@@ -36,8 +40,12 @@ public class DbSQLiteHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table if not exists " + Constants.TBL_CONFIG + " (id integer primary key, syncdata_last_sync_time text, table_drop_time text)");
         db.execSQL("create table if not exists " + Constants.TBL_RAW_MATERIAL + " (id integer primary key, slug text, name text DEFAULT '', type text, length text, ref_id text, status integer, is_deleted text, created_on text, updated_on text, last_sync_time text)");
-        db.execSQL("create table if not exists " + Constants.TBL_RAW_MATERIAL_AUDIT + " (id integer primary key, slug text, mertric_count text, audit_type text, supplier_name text , audit_date text, comment text , status integer, metric_count integer, raw_material_ref_id text, is_deleted text, created_on text, updated_on text, last_sync_time text)");
+        db.execSQL("create table if not exists " + Constants.TBL_RAW_MATERIAL_AUDIT + " (id integer primary key, slug text, audit_type text, supplier_name text , audit_date text, comment text , status integer, metric_count integer, raw_material_ref_id text, is_deleted text, created_on text, updated_on text, last_sync_time text)");
         db.execSQL("create table if not exists " + Constants.TBL_METRICS+ " (id integer primary key, slug text, name text, category text, is_deleted text, comment text, status text, created_on text, updated_on text, last_sync_time text)");
+        db.execSQL("create table if not exists " + Constants.TBL_PRODUCT+ " (id integer primary key, slug text, name text, ref_id text, is_deleted text, comment text, status text, created_on text, updated_on text, last_sync_time text)");
+        db.execSQL("create table if not exists " + Constants.TBL_PRODUCTION_PROCESS+ " (id integer primary key, slug text, name text, ref_id text, is_deleted text, comment text, status text, created_on text, updated_on text, last_sync_time text)");
+        db.execSQL("create table if not exists " + Constants.TBL_P_MACHINE+ " (id integer primary key, slug text, name text, ref_id text, is_deleted text, comment text, status text, created_on text, updated_on text, last_sync_time text)");
+        db.execSQL("create table if not exists " + Constants.TBL_MACHINE_PRODUCTIVITY_AUDIT + " (id integer primary key, slug text, machine_slug text, product_slug text, process_slug text, process_description text, job_order_id text, work_done_from_time text, work_done_to_time text, quantity_approved text, quantity_rejected text, quantity_rework text, operator_name text, supervisor_name text, is_rework text, is_supervisor_approved text, status text, comment text, created_on text, updated_on text, last_sync_time text)");
 
     }
 
@@ -123,6 +131,162 @@ public class DbSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+    public ProductionProcessModel getProductionProcessModel(String value) {
+
+        ProductionProcessModel materialModel = new ProductionProcessModel();
+
+        Cursor cursor = getDataByKey(Constants.TBL_PRODUCTION_PROCESS, "slug", value);
+
+        if(cursor.moveToFirst())
+            materialModel = (ProductionProcessModel) setModel(ProductionProcessModel.class, cursor);
+
+        return materialModel;
+    }
+
+
+    public ArrayList<ProductionProcessModel> getProductionProcessModels() {
+        ArrayList<ProductionProcessModel> materialModels = new ArrayList<ProductionProcessModel>();
+        Cursor cursor = executeQuery("SELECT * FROM " + Constants.TBL_PRODUCTION_PROCESS);
+
+        Log.e("tot_r_p", ""+cursor.getCount()+"==");
+
+        while (cursor.moveToNext()) materialModels.add(setProductionProcessModel(cursor));
+        cursor.close();
+
+        return materialModels;
+
+    }
+
+    public ProductModel getProductModel(String value) {
+
+        ProductModel materialModel = new ProductModel();
+
+        Cursor cursor = getDataByKey(Constants.TBL_PRODUCT, "slug", value);
+
+        if(cursor.moveToFirst())
+            materialModel = (ProductModel) setModel(ProductModel.class, cursor);
+
+        return materialModel;
+    }
+
+
+    public ArrayList<ProductModel> getProductModels() {
+        ArrayList<ProductModel> materialModels = new ArrayList<ProductModel>();
+        Cursor cursor = executeQuery("SELECT * FROM " + Constants.TBL_PRODUCT);
+
+        Log.e("tot_r_p", ""+cursor.getCount()+"==");
+
+        while (cursor.moveToNext()) materialModels.add(setProductModel(cursor));
+        cursor.close();
+
+        return materialModels;
+
+    }
+
+    public PMachineModel getPMachineModel(String value) {
+
+        PMachineModel materialModel = new PMachineModel();
+
+        Cursor cursor = getDataByKey(Constants.TBL_P_MACHINE, "slug", value);
+
+        if(cursor.moveToFirst())
+            materialModel = (PMachineModel) setModel(PMachineModel.class, cursor);
+
+        return materialModel;
+    }
+
+    public ArrayList<PMachineModel> getPMachineModels() {
+        ArrayList<PMachineModel> materialModels = new ArrayList<PMachineModel>();
+        Cursor cursor = executeQuery("SELECT * FROM " + Constants.TBL_P_MACHINE);
+
+        Log.e("tot_r_p", ""+cursor.getCount()+"==");
+
+        while (cursor.moveToNext()) materialModels.add(setPMachineModel(cursor));
+        cursor.close();
+
+        return materialModels;
+
+    }
+
+
+    public MachineProductivityAuditModel getMachineProductivityAuditModel(String value) {
+
+        MachineProductivityAuditModel materialModel = new MachineProductivityAuditModel();
+
+        Cursor cursor = getDataByKey(Constants.TBL_MACHINE_PRODUCTIVITY_AUDIT, "slug", value);
+
+        if(cursor.moveToFirst())
+            materialModel = (MachineProductivityAuditModel) setModel(MachineProductivityAuditModel.class, cursor);
+
+        return materialModel;
+    }
+
+
+    public String addConstrainsAND(String constrains_q, String value)
+    {
+
+        if(DataUtils.isStringValueExist(value))
+        {
+
+            if(DataUtils.isStringValueExist(constrains_q))
+                constrains_q += " AND "+ value;
+            else
+                constrains_q = " WHERE "+value;
+
+        }
+
+        return constrains_q;
+    }
+
+//    machine_slug text, product_slug text, process_slug text, process_description text, job_order_id text,
+// work_done_from_time text, work_done_to_time text, quantity_approved text, quantity_rejected text, quantity_rework text,
+// operator_name text, supervisor_name text, is_rework text, is_supervisor_approved text, status text, comment text, created_on text, updated_on text, last_sync_time text)");
+
+    public ArrayList<MachineProductivityAuditModel> getMachineProductivityAuditModels(String fl_machine_slug, String fl_product_slug, String fl_job_order_id, String fl_work_start_time, String fl_work_end_time) {
+
+        ArrayList<MachineProductivityAuditModel> materialModels = new ArrayList<MachineProductivityAuditModel>();
+
+        String query_base  = "SELECT * FROM " + Constants.TBL_MACHINE_PRODUCTIVITY_AUDIT;
+
+        String constrains = "";
+
+
+        if(DataUtils.isStringValueExist(fl_machine_slug))
+            constrains = addConstrainsAND(constrains, " machine_slug = '" +fl_machine_slug+ "' ");
+
+        if(DataUtils.isStringValueExist(fl_product_slug))
+            constrains = addConstrainsAND(constrains, " product_slug = '" +fl_product_slug+ "' ");
+
+        if(DataUtils.isStringValueExist(fl_job_order_id))
+            constrains = addConstrainsAND(constrains, " job_order_id = '" +fl_job_order_id+ "' ");
+
+        if(DataUtils.isStringValueExist(fl_work_start_time))
+            constrains = addConstrainsAND(constrains, " work_done_from_time >= '" +fl_work_start_time+ "' ");
+
+        if(DataUtils.isStringValueExist(fl_work_end_time))
+            constrains = addConstrainsAND(constrains, " work_done_to_time <= '" +fl_work_end_time+ "' ");
+
+
+
+        String query_final = query_base+constrains;
+        Log.e("query_final ", "==="+query_final +"===");
+        Cursor cursor = executeQuery(query_final );
+
+        Log.e("tot_r_p", ""+cursor.getCount()+"==");
+
+        while (cursor.moveToNext()) {
+
+            MachineProductivityAuditModel machineProductivityAuditModel =setMachineProductivityAuditModel(cursor);
+            machineProductivityAuditModel.pMachineModel = getPMachineModel(machineProductivityAuditModel.machine_slug);
+            machineProductivityAuditModel.productModel = getProductModel(machineProductivityAuditModel.product_slug);
+            materialModels.add(machineProductivityAuditModel);
+        }
+        cursor.close();
+
+        return materialModels;
+
+    }
+
     public ArrayList<MaterialAuditModel> getmaterialAuditModels() {
         ArrayList<MaterialAuditModel> materialAuditsModels = new ArrayList<MaterialAuditModel>();
         Cursor cursor = executeQuery("SELECT * FROM " + Constants.TBL_RAW_MATERIAL_AUDIT + " WHERE audit_type<>'"+Constants.RM_AUDIT_PRODUCTION_PLANNING+"'");
@@ -156,6 +320,25 @@ public class DbSQLiteHelper extends SQLiteOpenHelper {
 
         return materialAuditModels;
 
+    }
+
+    public MachineProductivityAuditModel setMachineProductivityAuditModel(Cursor cursor) {
+        return (MachineProductivityAuditModel) setFieldsValues(MachineProductivityAuditModel.class, cursor);
+    }
+
+
+    public ProductionProcessModel setProductionProcessModel(Cursor cursor) {
+        return (ProductionProcessModel) setFieldsValues(ProductionProcessModel.class, cursor);
+    }
+
+
+    public ProductModel setProductModel(Cursor cursor) {
+        return (ProductModel) setFieldsValues(ProductModel.class, cursor);
+    }
+
+
+    public PMachineModel setPMachineModel(Cursor cursor) {
+        return (PMachineModel) setFieldsValues(PMachineModel.class, cursor);
     }
 
     public RawMaterialModel setMaterialModel(Cursor cursor) {

@@ -21,7 +21,6 @@ public class ValueUtils {
     final public static String RESPONSE_NO_DISPLAY = "NO_DISPLAY";
 
 
-
     final public static String ROOT_FOLDER_PREFIX = App.getAppContext().getResources().getString(R.string.app_name);
 
     final public static int VALUE_NO_CHANGE = -5;
@@ -82,5 +81,19 @@ public class ValueUtils {
         add("Passport");
 
     }};
+
+    final public static String RAW_MATERIAL_BG_COLOR_DEFAULT = "1";
+    final public static String RAW_MATERIAL_BG_COLOR_DELETE = "2";
+
+    final public static String RAW_MATERIAL_ITEM_DEFAULT = "1";
+    final public static String RAW_MATERIAL_ITEM_DELETE = "2";
+
+    final public static String RM_DELETE_PARAMS_REF_KEY= "ref_key";
+    final public static String RM_DELETE_PARAMS_REF_KEY_PARAMS= "ref_id";
+    final public static String RM_DELETE_PARAMS_REF_VALUE= "ref_value";
+    final public static String RM_DELETE_PARAMS_REF_TABLE= "ref_table";
+    final public static String RM_DELETE_PARAMS_REF_STATUS= "status_value";
+
+
 
 }

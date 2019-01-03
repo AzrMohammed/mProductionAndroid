@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@color/white">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/search_ly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rectangle_edittext"
+            android:orientation="vertical">
+
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/search_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="Search here"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_smallx" />
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/search_ly"
+            android:layout_marginTop="10dp" />
+
+
+        <LinearLayout
+            android:id="@+id/fab_ly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <FrameLayout
+                android:id="@+id/add_ly"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_corner">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="5dp"
+                    android:src="@drawable/add_btn"
+                    android:layout_gravity="center"/>
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

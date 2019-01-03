@@ -1,6 +1,8 @@
 package leora.com.baseapp.supportfiles;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import leora.com.baseapp.Constants;
+import leora.com.baseapp.R;
 import leora.com.baseapp.network.CustomJsonObjectRequest;
 import leora.com.baseapp.network.CustomResponseListener;
 import leora.com.baseapp.utils.ApiUtils;
@@ -43,6 +46,7 @@ public class CommonNetwork {
         });
 
     }
+
 
 
 

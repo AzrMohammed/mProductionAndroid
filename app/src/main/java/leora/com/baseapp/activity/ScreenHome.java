@@ -45,18 +45,15 @@ public class ScreenHome extends CustomAppCompatActivity {
     }
 
 
-    public void getIntents()
-    {
+    public void getIntents() {
 
     }
 
-    public void initializeViews()
-    {
+    public void initializeViews() {
         list_rv = findViewById(R.id.list_rv);
     }
 
-    public void setupValues()
-    {
+    public void setupValues() {
 
         mLayoutManager = new LinearLayoutManager(ScreenHome.this);
         list_rv.setLayoutManager(mLayoutManager);
@@ -65,21 +62,22 @@ public class ScreenHome extends CustomAppCompatActivity {
 
         homeListModels.add(new HomeListModel("Raw Materials", "Contains the list of raw materials irrespective of its availability.", R.drawable.ic_rm, ScreenRmBase.class));
         homeListModels.add(new HomeListModel("Raw Material Audits", "Contains all the transactions of the raw materials.", R.drawable.ic_rm_audit, ScreenRmAuditBase.class));
+        homeListModels.add(new HomeListModel("Machine Meta Data", "Contains list of available machinery details.", R.drawable.ic_rm_audit, ScreenMachineBase.class));
+        homeListModels.add(new HomeListModel("Product Meta Data", "Contains product process and production demand/supply details", R.drawable.ic_rm_audit, ScreenProductBase.class));
+        homeListModels.add(new HomeListModel("Process Meta Data", "Contains process details", R.drawable.ic_rm_audit, ScreenProcessBase.class));
+        homeListModels.add(new HomeListModel("Machinery Timeline details", "Contains hourly basis machinery utilization details", R.drawable.ic_rm_audit, ScreenMachineAuditBase.class));
 
 
         list_rv.setAdapter(new RecyclerViewMaterial());
 
     }
 
-    public void setupListeners()
-    {
+    public void setupListeners() {
 
     }
 
 
     public class RecyclerViewMaterial extends RecyclerView.Adapter<RecyclerViewHolder> {
-
-
 
 
         public RecyclerViewMaterial() {
@@ -98,7 +96,7 @@ public class ScreenHome extends CustomAppCompatActivity {
         @Override
         public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
 
-            final HomeListModel homeListModel= homeListModels.get(position);
+            final HomeListModel homeListModel = homeListModels.get(position);
 
             holder.name_tv.setText(homeListModel.name);
             holder.description_tv.setText(homeListModel.description);

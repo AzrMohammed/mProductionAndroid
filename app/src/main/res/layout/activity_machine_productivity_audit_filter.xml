@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <leora.com.baseapp.customviews.F1TextViewLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Machine Productivity Audit Filter"
+                android:textColor="@color/black_solid"
+                android:textSize="@dimen/text_largex"
+
+                />
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/machine_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:editable="false"
+                android:hint="Machine Name"
+                android:inputType="none"
+                android:lines="1"
+                android:maxLength="30"
+                android:textSize="@dimen/text_smallx" />
+
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/product_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:editable="false"
+                android:hint="Product Name"
+                android:inputType="none"
+                android:lines="1"
+                android:maxLength="30"
+                android:textSize="@dimen/text_smallx" />
+
+
+            <leora.com.baseapp.customviews.F1EditTextLight
+                android:id="@+id/job_order_id_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Job Order Id"
+                android:inputType="textEmailAddress|textCapCharacters"
+                android:lines="1"
+                android:maxLength="30"
+                android:textSize="@dimen/text_smallx" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="5">
+
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+                    android:id="@+id/audit_date_from_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="3"
+                    android:editable="false"
+                    android:hint="Audit from date"
+                    android:inputType="none"
+                    android:textSize="@dimen/text_smallx" />
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+                    android:id="@+id/audit_time_from_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="2"
+                    android:editable="false"
+                    android:hint="Audit from time"
+                    android:inputType="none"
+                    android:textSize="@dimen/text_smallx" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="5">
+
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+
+                    android:id="@+id/audit_date_to_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="3"
+                    android:editable="false"
+                    android:hint="Audit to date"
+                    android:inputType="none"
+                    android:textSize="@dimen/text_smallx" />
+
+                <leora.com.baseapp.customviews.F1EditTextLight
+
+                    android:id="@+id/audit_time_to_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="2"
+                    android:editable="false"
+                    android:hint="Audit to time"
+                    android:inputType="none"
+                    android:textSize="@dimen/text_smallx" />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/submit_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_button_primary"
+                android:orientation="vertical">
+
+
+                <leora.com.baseapp.customviews.F1TextViewRegular
+                    android:id="@+id/submit_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Apply"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_smallx" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

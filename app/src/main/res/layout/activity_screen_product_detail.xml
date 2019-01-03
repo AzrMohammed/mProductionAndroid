@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/common_header_1"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:layout_gravity="top"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/audit_from_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <leora.com.baseapp.customviews.F1TextViewBold
+                    android:id="@+id/from_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Reference Id"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_kind_grey"
+                    android:textSize="@dimen/text_smallxx" />
+
+                <leora.com.baseapp.customviews.F1TextViewRegular
+                    android:id="@+id/product_ref_id_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_kind_grey"
+                    android:textSize="@dimen/text_smallx" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <leora.com.baseapp.customviews.F1TextViewRegular
+                    android:id="@+id/process_header_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="0dp"
+                    android:text="Process list"
+                    android:textColor="@color/black_solid"
+                    android:textSize="@dimen/text_largex" />
+
+
+                <ImageView
+                    android:id="@+id/edit_process_iv"
+                    android:tint="@color/colorPrimary"
+                    android:layout_width="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="30dp"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_edit"
+                    />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

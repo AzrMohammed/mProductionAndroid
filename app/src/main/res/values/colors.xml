@@ -2,8 +2,8 @@
 <resources>
     <!--<color name="colorPrimary">#fe4c4c</color>-->
     <!--<color name="colorPrimary">#515151</color>-->
-    <color name="colorPrimary">#F04234</color>
-    <color name="colorPrimary90">#E6914123</color>
+    <color name="colorPrimary">#521996</color>
+    <color name="colorPrimary90">#E6521996</color>
 
     <color name="tab_color_selected">#F04234</color>
     <color name="tab_color_deselected">#515151</color>
@@ -11,13 +11,15 @@
     <color name="textColorPrimary">#F04234</color>
 
 
-    <color name="header_image">#3d3d3d</color>
+    <color name="item_default">#ffffff</color>
+    <color name="item_deleted">#f0f0f0</color>
+
     <color name="header_title">#3d3d3d</color>
     <color name="list_item">#282828</color>
     <color name="list_item_seperator">#F7F7F7</color>
 
 
-    <color name="colorPrimaryDark">#4a4a4f</color>
+    <color name="colorPrimaryDark">#35146E</color>
     <color name="divider_light_grey">#CCCCCC</color>
 
     <color name="colorPrimary_onpressed">#914123</color>
@@ -32,13 +34,13 @@
     <color name="text_kind_grey">#5c5c5c</color>
     <color name="text_ultralight_grey_title">#6E6E6E</color>
     <color name="text_ultralight_grey">#A0A0A0</color>
-    <color name="secondaryColor">#A0A0A0</color>
+    <color name="secondaryColor">#3AAF27</color>
     <color name="filter_reset_bg">#dadad9</color>
     <color name="filter_reset_text">#474545</color>
     <color name="listview_disabledbg">#ebebeb</color>
     <color name="listview_disabledtextbg">#9b9b9b</color>
 
-    <color name="colorPrimary_t">#036F6F</color>
+    <color name="colorPrimary_t">#521996</color>
     <color name="colorSecondary_t">#6CBA22</color>
 
     <color name="et_label_default">#F0F0F0</color>

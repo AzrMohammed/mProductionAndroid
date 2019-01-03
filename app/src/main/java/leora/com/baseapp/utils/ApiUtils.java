@@ -44,7 +44,7 @@ public class ApiUtils {
         HashMap<String, String> params = new HashMap<String, String>();
 
         params.put("tempp1", "temp11");
-        params.put("tempp12", "temp112");
+//        params.put("tempp12", "temp112");
 
         String device_identifier = Settings.Secure.getString(App.getAppContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         if (DataUtils.isStringValueExist(device_identifier))

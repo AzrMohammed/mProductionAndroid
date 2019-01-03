@@ -153,7 +153,19 @@ public class ScreenAuditFilter extends CustomAppCompatActivity {
 
                         Log.e("rec_date", dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                        fl_audit_date_from = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                        String dayOfMonth_s = ""+ dayOfMonth;
+                        String monthOfYear_s = ""+ monthOfYear;
+
+                        if(dayOfMonth <10)
+                            dayOfMonth_s = "0"+dayOfMonth;
+
+                        if(monthOfYear <10)
+                            monthOfYear_s = "0"+monthOfYear;
+
+
+                        String date_s = year + "-" + monthOfYear_s + "-" + dayOfMonth_s;
+
+                        fl_audit_date_from = date_s;
                         audit_from_date_tv.setText(fl_audit_date_from);
 
                     }

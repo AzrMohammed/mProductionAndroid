@@ -20,8 +20,10 @@
 
             <leora.com.baseapp.customviews.F1TextViewLight
                 android:layout_width="match_parent"
+                android:id="@+id/title_tv"
+                android:lines="1"
                 android:layout_height="wrap_content"
-                android:text="Add Raw Material Audit"
+                android:text="Add Product"
                 android:textSize="@dimen/text_largex"
                 android:textColor="@color/black_solid"
 
@@ -29,72 +31,28 @@
 
 
             <leora.com.baseapp.customviews.F1EditTextLight
-
-                android:editable="false" android:inputType="none"
-                android:id="@+id/rm_tv"
+                android:id="@+id/name_et"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:lines="1"
                 android:layout_height="wrap_content"
-                android:hint="Raw material"
+                android:hint="Product name"
                 android:textSize="@dimen/text_smallx"
                 />
 
             <leora.com.baseapp.customviews.F1EditTextLight
-                android:id="@+id/metric_count_tv"
+                android:id="@+id/ref_id_et"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:maxLength="6"
-                android:hint="Count (Total quantity)"
-                android:textSize="@dimen/text_smallx"
-                />
-
-            <leora.com.baseapp.customviews.F1EditTextLight
-                android:id="@+id/supplier_name_tv"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Supplier Name (optional)"
                 android:inputType="textCapSentences"
+                android:hint="Product id (Product Code)"
                 android:textSize="@dimen/text_smallx"
                 />
 
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="5"
-                >
-
-
-                <leora.com.baseapp.customviews.F1EditTextLight
-
-                    android:editable="false" android:inputType="none"
-                    android:id="@+id/audit_date_tv"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="wrap_content"
-                    android:hint="Audit date"
-                    android:textSize="@dimen/text_smallx"
-                    />
-
-                <leora.com.baseapp.customviews.F1EditTextLight
-
-                    android:editable="false" android:inputType="none"
-                    android:id="@+id/audit_time_tv"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Audit time"
-                    android:textSize="@dimen/text_smallx"
-                    />
-
-
-            </LinearLayout>
 
             <leora.com.baseapp.customviews.F1EditTextLight
                 android:id="@+id/comment_tv"
@@ -134,9 +92,5 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
     </ScrollView>
-
-
 </LinearLayout>

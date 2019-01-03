@@ -16,7 +16,7 @@ import java.util.Map;
 import leora.com.baseapp.Constants;
 import leora.com.baseapp.R;
 import leora.com.baseapp.customclass.CustomAppCompatActivity;
-import leora.com.baseapp.model.dbmodel.RawMaterialModel;
+import leora.com.baseapp.model.dbmodel.PMachineModel;
 import leora.com.baseapp.network.CustomJsonObjectRequest;
 import leora.com.baseapp.network.CustomResponseListener;
 import leora.com.baseapp.utils.ApiUtils;
@@ -27,20 +27,20 @@ import leora.com.baseapp.utils.DisplayUtils;
  * Created by AZR on 26-11-2018.
  */
 
-public class ScreenRmAdd extends CustomAppCompatActivity {
+public class ScreenMachineAdd extends CustomAppCompatActivity {
 
 
     LinearLayout submit_ly;
-    EditText comment_tv, length_et, ref_id_et, name_et;
-    String comment, length, ref_id, name;
+    EditText comment_tv, ref_id_et, name_et;
+    String comment, ref_id, name;
     TextView title_tv;
 
-    RawMaterialModel rawMaterialModel = new RawMaterialModel();
+    PMachineModel productModel = new PMachineModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rm_add);
+        setContentView(R.layout.layout_pmachine_add);
 
         getIntents();
         initializeViews();
@@ -54,12 +54,15 @@ public class ScreenRmAdd extends CustomAppCompatActivity {
     {
 
         try {
-            rawMaterialModel = (RawMaterialModel) getIntent().getSerializableExtra("rm_obj");
+            productModel = (PMachineModel) getIntent().getSerializableExtra("product_obj");
 
-            if(rawMaterialModel == null)
-                rawMaterialModel = new RawMaterialModel();
+            if(productModel == null)
+                productModel = new PMachineModel();
+
+            Log.e("pro_Add", "camtry");
         } catch (Exception e) {
-            rawMaterialModel = new RawMaterialModel();
+            productModel = new PMachineModel();
+            Log.e("pro_Add", "camecatch");
             e.printStackTrace();
         }
     }
@@ -70,7 +73,6 @@ public class ScreenRmAdd extends CustomAppCompatActivity {
         title_tv = findViewById(R.id.title_tv);
         name_et = findViewById(R.id.name_et);
         ref_id_et = findViewById(R.id.ref_id_et);
-        length_et = findViewById(R.id.length_et);
         comment_tv = findViewById(R.id.comment_tv);
 
         submit_ly = findViewById(R.id.submit_ly);
@@ -78,31 +80,26 @@ public class ScreenRmAdd extends CustomAppCompatActivity {
 
     public void setupValues()
     {
-        if(DataUtils.isStringValueExist(rawMaterialModel.ref_id))
+        if(DataUtils.isStringValueExist(productModel.ref_id))
         {
-            title_tv.setText("Update Raw Material");
+            title_tv.setText("Update Machine Details");
 
-            if(DataUtils.isStringValueExist(rawMaterialModel.name))
+            if(DataUtils.isStringValueExist(productModel.name))
             {
-                name_et.setText(rawMaterialModel.name);
+                name_et.setText(productModel.name);
                 name_et.setSelection(name_et.getText().toString().length());
             }
 
-            if(DataUtils.isStringValueExist(rawMaterialModel.ref_id))
+            if(DataUtils.isStringValueExist(productModel.ref_id))
             {
-                ref_id_et.setText(rawMaterialModel.ref_id);
+                ref_id_et.setText(productModel.ref_id);
                 ref_id_et.setSelection(ref_id_et.getText().toString().length());
             }
 
-            if(DataUtils.isStringValueExist(rawMaterialModel.length))
-            {
-                length_et.setText(rawMaterialModel.length);
-                length_et.setSelection(length_et.getText().toString().length());
-            }
 
-            if(DataUtils.isStringValueExist(rawMaterialModel.comment))
+            if(DataUtils.isStringValueExist(productModel.comment))
             {
-                comment_tv.setText(rawMaterialModel.comment);
+                comment_tv.setText(productModel.comment);
                 comment_tv.setSelection(comment_tv.getText().toString().length());
             }
 
@@ -110,7 +107,7 @@ public class ScreenRmAdd extends CustomAppCompatActivity {
         }
         else
         {
-            title_tv.setText("Add Raw Material");
+            title_tv.setText("Add Machine Detail");
         }
     }
 
@@ -129,24 +126,21 @@ public class ScreenRmAdd extends CustomAppCompatActivity {
     {
         name = name_et.getText().toString();
         ref_id = ref_id_et.getText().toString();
-        length = length_et.getText().toString();
         comment = comment_tv.getText().toString();
 
-        if (DataUtils.isStringValueExist(ScreenRmAdd.this, name, "Raw material Name", true))
-        if (DataUtils.isStringValueExist(ScreenRmAdd.this, ref_id, "Raw material reference id", true))
+        if (DataUtils.isStringValueExist(ScreenMachineAdd.this, name, "Machine Name", true))
+        if (DataUtils.isStringValueExist(ScreenMachineAdd.this, ref_id, "Machine reference id", true))
             proceedAddRm();
 
     }
 
     public void proceedAddRm() {
-        final String url = Constants.URL_ADD_RM;
+        final String url = Constants.URL_ADD_P_MACHINE;
 
         Map<String, String> params = ApiUtils.getApiRequestDefaultMap();
         params.put("ref_id", ref_id);
         params.put("name", name);
 
-        if(DataUtils.isStringValueExist(length))
-            params.put("length", length);
 
 
         if(DataUtils.isStringValueExist(comment))
@@ -156,14 +150,14 @@ public class ScreenRmAdd extends CustomAppCompatActivity {
         JSONObject request_obj = DataUtils.convertMapToJsonObj(params);
 
 
-        new CustomJsonObjectRequest(ScreenRmAdd.this, true, Request.Method.POST, url, request_obj, new CustomResponseListener() {
+        new CustomJsonObjectRequest(ScreenMachineAdd.this, true, Request.Method.POST, url, request_obj, new CustomResponseListener() {
             @Override
             public void responseSuccess(JSONObject response) {
                 Log.e("cameonss", "===" + response);
                 try {
                     if (response.getBoolean("status")) {
 
-                        DisplayUtils.showMessage(ScreenRmAdd.this, "Raw material added successfully.");
+                        DisplayUtils.showMessage(ScreenMachineAdd.this, "Machine added successfully.");
                         finish();
 
                     }

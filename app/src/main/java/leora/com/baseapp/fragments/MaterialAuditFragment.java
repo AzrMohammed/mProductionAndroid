@@ -49,6 +49,7 @@ import leora.com.baseapp.utils.ApiUtils;
 import leora.com.baseapp.utils.DataUtils;
 import leora.com.baseapp.utils.DisplayUtils;
 import leora.com.baseapp.utils.ValueUtils;
+import leora.com.baseapp.utils.ViewUtils;
 
 public class MaterialAuditFragment extends android.support.v4.app.Fragment {
 
@@ -69,9 +70,7 @@ public class MaterialAuditFragment extends android.support.v4.app.Fragment {
     String fl_audit_type = "";
     String fl_rm_ref_id = "";
     String fl_rm_name = "";
-
-    ImageView back_press_iv;
-    TextView screen_name_tv;
+    View view;
 
     public static MaterialAuditFragment newInstance() {
 
@@ -82,7 +81,7 @@ public class MaterialAuditFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rm_audit, container, false);
+        view = inflater.inflate(R.layout.fragment_rm_audit, container, false);
         return view;
     }
 
@@ -103,9 +102,6 @@ public class MaterialAuditFragment extends android.support.v4.app.Fragment {
         filter_ly = view.findViewById(R.id.filter_ly);
         add_ly = view.findViewById(R.id.add_ly);
 
-        screen_name_tv = view.findViewById(R.id.screen_name_tv);
-        back_press_iv = view.findViewById(R.id.back_press_iv);
-
         mLayoutManager = new LinearLayoutManager(getActivity());
         recycler_view.setLayoutManager(mLayoutManager);
 
@@ -118,18 +114,12 @@ public class MaterialAuditFragment extends android.support.v4.app.Fragment {
         getRmAudits();
         recyclerViewMaterial = new RecyclerViewMaterial(materialAuditModels);
 
-        screen_name_tv.setText("Raw Material Audits");
+        ViewUtils.setHeaderC1(getActivity(), view.findViewById(R.id.top_bar_header_ly), "Raw Material Audits ");
+
 
     }
 
     private void setupListeners() {
-
-        back_press_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
 
         add_ly.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,10 +23,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import leora.com.baseapp.App;
+import leora.com.baseapp.Constants;
 import leora.com.baseapp.supportfiles.CommonMethods;
 import leora.com.baseapp.supportfiles.CommonNetwork;
-import leora.com.baseapp.Constants;
-import leora.com.baseapp.utils.DataUtils;
+import leora.com.baseapp.utils.ApiUtils;
 import leora.com.baseapp.utils.ValueUtils;
 import leora.com.baseapp.utils.ViewUtils;
 
@@ -34,78 +34,62 @@ import leora.com.baseapp.utils.ViewUtils;
  * Created by AZR on 09-03-2018.
  */
 
-public class CustomJsonObjectRequest {
+public class CustomJsonDeleteRequest {
 
     ProgressDialog pDialog;
 
 
-    public CustomJsonObjectRequest(final Activity activity, Boolean show_progress, String progress_text, int method, String url, JSONObject jsonRequest, final CustomResponseListener customResponseListener) {
-        proceedAPI(activity, show_progress, progress_text, method, url, jsonRequest, customResponseListener);
+    public CustomJsonDeleteRequest(final Activity activity, Boolean show_progress, String progress_text, int method, String url, JSONObject jsonRequest, final CustomDeleteResponseListener customDeleteResponseListener) {
+        proceedDeleteAPI(activity, show_progress, progress_text, method, url, jsonRequest, customDeleteResponseListener);
     }
 
-    public CustomJsonObjectRequest(final Activity activity, Boolean show_progress, int method, String url, JSONObject jsonRequest, final CustomResponseListener customResponseListener) {
-        proceedAPI(activity, show_progress, "Loading...", method, url, jsonRequest, customResponseListener);
-    }
 
-    public CustomJsonObjectRequest(final Activity activity, int method, String url, JSONObject jsonRequest, final CustomResponseListener customResponseListener) {
-        proceedAPI(activity, false, "",method, url, jsonRequest, customResponseListener);
+    public void proceedDeleteAPI(final Activity activity, Boolean show_progress, String progress_text, int method, final String url, JSONObject jsonRequest, final CustomDeleteResponseListener customDeleteResponseListener) {
 
-    }
-
-    public void proceedAPI(final Activity activity, Boolean show_progress, String progress_text, int method, final String url, JSONObject jsonRequest, final CustomResponseListener customResponseListener) {
-
-        Log.e("reccc_url_cc", "=="+url+"=="+jsonRequest+"==");
         if (activity == null)
             show_progress = false;
         final Boolean show_progress_f = show_progress;
-        final HashMap<String, String> report_error_map = CommonMethods.getErrorReportMap();
-
-        report_error_map.put("request_params", (jsonRequest == null) ? null : jsonRequest.toString());
-        report_error_map.put("request_url", url);
 
 
         try {
             RequestQueue requestQueue;
-                    if(activity != null)
-                    requestQueue=  Volley.newRequestQueue(activity);
-                    else
-                    requestQueue=  Volley.newRequestQueue(App.getAppContext());
+            if (activity != null)
+                requestQueue = Volley.newRequestQueue(activity);
+            else
+                requestQueue = Volley.newRequestQueue(App.getAppContext());
 
             final String URL = url;
 
-            if (show_progress_f)
-            {
+            if (show_progress_f) {
                 pDialog = ViewUtils.showProgressBar(pDialog, activity, progress_text);
             }
 
-//            Log.e("req_url", URL);
-//            Log.e("req_params", "==="+jsonRequest.toString());
-
+            Log.e( "proceedDeleteAPI: ",jsonRequest+"+=" );
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(method, URL, jsonRequest, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
 
 
-                    Log.e("rec_response", URL+"===" + response);
+                    Log.e("rec_response", URL + "===" + response);
 
                     if (show_progress_f)
                         ViewUtils.hideProgressBar(pDialog);
                     try {
-                        JSONObject jsonObject = new JSONObject(response+"");
+                        JSONObject jsonObject = new JSONObject(response + "");
 
                         if (jsonObject.optBoolean("status")) {
-                            if(activity != null && (!jsonObject.optString("status_message").equals(ValueUtils.RESPONSE_NO_DISPLAY)))
-                            Toast.makeText(activity, jsonObject.optString("status_message"), Toast.LENGTH_SHORT).show();
-                            customResponseListener.responseSuccess(jsonObject);
+                            if (activity != null && (!jsonObject.optString("status_message").equals(ValueUtils.RESPONSE_NO_DISPLAY)))
+                                Toast.makeText(activity, jsonObject.optString("status_message"), Toast.LENGTH_SHORT).show();
+                            customDeleteResponseListener.responseSuccess(jsonObject);
                         } else {
-                            customResponseListener.responseFailure(jsonObject);
-                            if(activity != null && (!jsonObject.optString("status_message").equals(ValueUtils.RESPONSE_NO_DISPLAY)))
-                            Toast.makeText(activity, jsonObject.optString("status_message"), Toast.LENGTH_SHORT).show();
+                            customDeleteResponseListener.responseFailure(jsonObject);
+                            if (activity != null && (!jsonObject.optString("status_message").equals(ValueUtils.RESPONSE_NO_DISPLAY)))
+                                Toast.makeText(activity, jsonObject.optString("status_message"), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
-                        if(activity != null)
-                        Toast.makeText(activity, "Error occurred. Kindly try again", Toast.LENGTH_SHORT).show();
+                        if (activity != null)
+                            Toast.makeText(activity, "Error occurred. Kindly try again", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         Log.e("jobj_err", "===" + e);
                     }
@@ -134,17 +118,15 @@ public class CustomJsonObjectRequest {
 //                        "Connection TimeOut! Please check your internet connection."
                     }
 
-                    Log.e("error_url", "==="+URL+"=="+message);
+                    Log.e("error_url", "===" + URL + "==" + message);
 
 
-                    if(!url.equals(Constants.URL_REPORT_ERROR))
-                    CommonNetwork.reportError(report_error_map);
                     if (show_progress_f)
                         ViewUtils.hideProgressBar(pDialog);
 //                    Log.e("VOLLEYfai", error.toString());
-                    customResponseListener.responseError(message);
-                    if(activity != null)
-                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                    customDeleteResponseListener.responseError(message);
+                    if (activity != null)
+                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -162,8 +144,6 @@ public class CustomJsonObjectRequest {
             e.printStackTrace();
         }
     }
-
-
 
 
 }

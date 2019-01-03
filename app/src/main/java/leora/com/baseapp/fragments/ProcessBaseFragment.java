@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,9 +35,10 @@ import java.util.Map;
 
 import leora.com.baseapp.Constants;
 import leora.com.baseapp.R;
-import leora.com.baseapp.activity.ScreenRmAdd;
+import leora.com.baseapp.activity.ScreenProcessAdd;
+import leora.com.baseapp.activity.ScreenProductAdd;
 import leora.com.baseapp.model.DbSQLiteHelper;
-import leora.com.baseapp.model.dbmodel.RawMaterialModel;
+import leora.com.baseapp.model.dbmodel.ProductionProcessModel;
 import leora.com.baseapp.network.CustomDeleteResponseListener;
 import leora.com.baseapp.network.CustomJsonDeleteRequest;
 import leora.com.baseapp.network.CustomJsonObjectRequest;
@@ -50,28 +50,28 @@ import leora.com.baseapp.utils.DisplayUtils;
 import leora.com.baseapp.utils.ValueUtils;
 import leora.com.baseapp.utils.ViewUtils;
 
-public class MaterialDetailFragment extends Fragment {
+public class ProcessBaseFragment extends android.support.v4.app.Fragment {
 
     RecyclerView recycler_view;
     DbSQLiteHelper dbSQLiteHelper;
     LinearLayout fab_ly;
-    ArrayList<RawMaterialModel> materialModels = new ArrayList<RawMaterialModel>();
-    ArrayList<RawMaterialModel> filtered_lists = new ArrayList<RawMaterialModel>();
+    ArrayList<ProductionProcessModel> materialModels = new ArrayList<ProductionProcessModel>();
+    ArrayList<ProductionProcessModel> filtered_lists = new ArrayList<ProductionProcessModel>();
     RecyclerView.LayoutManager mLayoutManager;
     EditText search_et;
     boolean is_dialog_showing = false;
     RecyclerViewMaterial recyclerViewMaterial;
 
-    public static MaterialDetailFragment newInstance() {
+    public static ProcessBaseFragment newInstance() {
 
-        final MaterialDetailFragment fragment = new MaterialDetailFragment();
+        final ProcessBaseFragment fragment = new ProcessBaseFragment();
         return fragment;
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_material_fagment, container, false);
+        View view = inflater.inflate(R.layout.fragment_process_base, container, false);
         return view;
     }
 
@@ -90,7 +90,6 @@ public class MaterialDetailFragment extends Fragment {
         search_et = view.findViewById(R.id.search_et);
         fab_ly = view.findViewById(R.id.fab_ly);
 
-        ViewUtils.setHeaderC1(getActivity(), view.findViewById(R.id.top_bar_header_ly), "Raw Materials List");
         mLayoutManager = new LinearLayoutManager(getActivity());
         recycler_view.setLayoutManager(mLayoutManager);
 
@@ -100,7 +99,6 @@ public class MaterialDetailFragment extends Fragment {
     private void setupValues() {
 
         dbSQLiteHelper = CommonMethods.getDbModel(getActivity());
-        proceedSampleRequest();
         recyclerViewMaterial = new RecyclerViewMaterial(materialModels);
 
         ViewUtils.hideKeyboard(getActivity());
@@ -122,7 +120,7 @@ public class MaterialDetailFragment extends Fragment {
 
                 String str = charSequence.toString();
 
-                filtered_lists = new ArrayList<RawMaterialModel>();
+                filtered_lists = new ArrayList<ProductionProcessModel>();
 
                 for (int j = 0; j < materialModels.size(); j++) {
 
@@ -154,7 +152,7 @@ public class MaterialDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                showAddAlert(getActivity(),"","");
-                Intent intent = new Intent(getActivity(), ScreenRmAdd.class);
+                Intent intent = new Intent(getActivity(), ScreenProcessAdd.class);
 
                 startActivity(intent);
 
@@ -166,10 +164,10 @@ public class MaterialDetailFragment extends Fragment {
 
     public class RecyclerViewMaterial extends RecyclerView.Adapter<RecyclerViewHolder> {
 
-        ArrayList<RawMaterialModel> materialModels_final = new ArrayList<RawMaterialModel>();
+        ArrayList<ProductionProcessModel> materialModels_final = new ArrayList<ProductionProcessModel>();
 
 
-        public RecyclerViewMaterial(ArrayList<RawMaterialModel> materialModels) {
+        public RecyclerViewMaterial(ArrayList<ProductionProcessModel> materialModels) {
             this.materialModels_final = materialModels;
 
         }
@@ -186,10 +184,12 @@ public class MaterialDetailFragment extends Fragment {
         @Override
         public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
 
-            final RawMaterialModel materialModel = materialModels_final.get(position);
+            final ProductionProcessModel materialModel = materialModels_final.get(position);
 
             holder.material_name_tv.setText(materialModel.name);
+//            holder.material_name_tv.setText("Test");
             holder.material_ref_id_tv.setText(materialModel.ref_id);
+
 
             if (materialModel.status.equals(ValueUtils.RAW_MATERIAL_BG_COLOR_DEFAULT)) {
                 holder.parent_ly.setBackground(getResources().getDrawable(R.color.item_default));
@@ -198,33 +198,30 @@ public class MaterialDetailFragment extends Fragment {
                 holder.parent_ly.setBackground(getResources().getDrawable(R.color.item_deleted));
                 holder.delete_iv.setImageDrawable(getResources().getDrawable(R.drawable.ic_revert));
             }
+
             holder.edit_iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    showAddAlert(getActivity(),materialModel.name,materialModel.ref_id);
 
-                    Intent intent = new Intent(getActivity(), ScreenRmAdd.class);
+                    Intent intent = new Intent(getActivity(), ScreenProcessAdd.class);
 
-                    intent.putExtra("rm_obj", materialModel);
+                    intent.putExtra("process_obj", materialModel);
 
                     startActivity(intent);
                 }
             });
 
-
             holder.delete_iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("onClick: ", materialModel.status + "====");
                     AlertDialog diaBox = AskOption(materialModel.ref_id, materialModel.status);
                     diaBox.show();
                 }
             });
 
-            if (DataUtils.isStringValueExist(materialModel.length)) {
-                holder.length_tv.setText(materialModel.length);
-                holder.length_ly.setVisibility(View.VISIBLE);
-            } else {
+
+            {
                 holder.length_ly.setVisibility(View.GONE);
             }
 
@@ -251,10 +248,10 @@ public class MaterialDetailFragment extends Fragment {
 
             edit_iv = itemView.findViewById(R.id.edit_iv);
             delete_iv = itemView.findViewById(R.id.delete_iv);
-            parent_ly = itemView.findViewById(R.id.parent_ly);
 
             length_tv = itemView.findViewById(R.id.length_tv);
             length_ly = itemView.findViewById(R.id.length_ly);
+            parent_ly = itemView.findViewById(R.id.parent_ly);
 
         }
 
@@ -329,7 +326,7 @@ public class MaterialDetailFragment extends Fragment {
                                             }
 
 
-                                            materialModels = dbSQLiteHelper.getMaterialModels();
+                                            materialModels = dbSQLiteHelper.getProductionProcessModels();
 
                                             Log.e("array_size ", materialModels.size() + "===" + dbSQLiteHelper.getMaterialAuditModels().size());
 
@@ -381,132 +378,7 @@ public class MaterialDetailFragment extends Fragment {
         proceedSampleRequest();
     }
 
-    public void addDataRequest(String name, String ref_id, final AlertDialog alertDialog) {
-        final String url = Constants.URL_ADD_RM;
 
-        Map<String, String> params = ApiUtils.getApiRequestDefaultMap();
-        params.put("ref_id", ref_id);
-        params.put("name", name);
-
-        JSONObject request_obj = DataUtils.convertMapToJsonObj(params);
-
-
-        new CustomJsonObjectRequest(getActivity(), true, Request.Method.POST, url, request_obj, new CustomResponseListener() {
-            @Override
-            public void responseSuccess(JSONObject response) {
-                Log.e("cameonss", "===" + response);
-                try {
-                    if (response.getBoolean("status")) {
-
-                        proceedSampleRequest();
-
-                        alertDialog.cancel();
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-            }
-
-            @Override
-            public void responseFailure(JSONObject response) {
-
-
-            }
-
-            @Override
-            public void responseError(String message) {
-                Log.e("cameonerr", "===" + message);
-            }
-        });
-    }
-
-
-    public void showAddAlert(Activity activity, String upadte_name, String upadte_id) {
-        if (!is_dialog_showing) {
-            is_dialog_showing = true;
-
-            {
-                final AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(activity);
-                LayoutInflater inflater = activity.getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.secondary_card_dialog, null);
-                dialogBuilder.setView(dialogView);
-
-                final EditText add_ref_id_et = dialogView.findViewById(R.id.add_ref_id_et);
-                final EditText add_name_et = dialogView.findViewById(R.id.add_name_et);
-
-
-                TextView add_tv = dialogView.findViewById(R.id.add_tv);
-
-                add_ref_id_et.setText(upadte_id);
-                add_name_et.setText(upadte_name);
-
-
-                final AlertDialog alertDialog = dialogBuilder.create();
-
-                add_tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        String name_et = add_name_et.getText().toString().trim();
-                        String ref_id_et = add_ref_id_et.getText().toString().trim();
-
-
-                        if (DataUtils.isStringValueExist(name_et) && DataUtils.isStringValueExist(ref_id_et)) {
-                            addDataRequest(name_et, ref_id_et, alertDialog);
-                        } else {
-                            DisplayUtils.showMessage(getActivity(), "Pls Enter Details");
-                        }
-
-
-                    }
-                });
-
-
-                alertDialog.getWindow().
-
-                        setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-
-                alertDialog.setCancelable(true);
-
-                alertDialog.getWindow().
-
-                        setSoftInputMode(
-                                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                alertDialog.show();
-                alertDialog.getWindow().
-
-                        setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                alertDialog.setOnKeyListener(new DialogInterface.OnKeyListener()
-
-                {
-                    @Override
-                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                        if (keyCode == KeyEvent.KEYCODE_BACK &&
-                                event.getAction() == KeyEvent.ACTION_UP &&
-                                !event.isCanceled()) {
-                            alertDialog.cancel();
-                            is_dialog_showing = false;
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-
-                alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-
-                {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        is_dialog_showing = false;
-                    }
-                });
-            }
-
-        }
-    }
 
     public AlertDialog AskOption(final String id, final String revert_status) {
         String message = !revert_status.equals(ValueUtils.RAW_MATERIAL_ITEM_DEFAULT) ? "Add back deleted item" : "Delete item";
@@ -546,7 +418,7 @@ public class MaterialDetailFragment extends Fragment {
         Map<String, String> params = ApiUtils.getApiRequestDefaultMap();
         params.put(ValueUtils.RM_DELETE_PARAMS_REF_KEY, ValueUtils.RM_DELETE_PARAMS_REF_KEY_PARAMS);
         params.put(ValueUtils.RM_DELETE_PARAMS_REF_VALUE, ref_id);
-        params.put(ValueUtils.RM_DELETE_PARAMS_REF_TABLE, Constants.TBL_RAW_MATERIAL);
+        params.put(ValueUtils.RM_DELETE_PARAMS_REF_TABLE, Constants.TBL_PRODUCTION_PROCESS);
         params.put(ValueUtils.RM_DELETE_PARAMS_REF_STATUS, status_to);
         JSONObject request_obj = DataUtils.convertMapToJsonObj(params);
 

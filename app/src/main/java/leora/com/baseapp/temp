@@ -1,0 +1,1 @@
+EditText product_name, machine_name, audit_time_from, audit_date_from, process_description, job_order_id, audit_time_to, audit_date_to;
